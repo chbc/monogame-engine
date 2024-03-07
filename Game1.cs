@@ -8,6 +8,7 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    private SpriteFont _font;
 
     public Game1()
     {
@@ -25,7 +26,7 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+        _font = Content.Load<SpriteFont>("arial24");
     }
 
     protected override void Update(GameTime gameTime)
@@ -43,7 +44,7 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
         _spriteBatch.Begin();
-        
+        _spriteBatch.DrawString(_font, "Texto", Vector2.Zero, Color.Red);
         _spriteBatch.End();
 
         base.Draw(gameTime);
