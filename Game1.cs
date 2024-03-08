@@ -44,7 +44,7 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
         _spriteBatch.Begin();
-        _spriteBatch.DrawString(_font, "Texto", Vector2.Zero, Color.Red);
+        _spriteBatch.DrawString(_font, "Texto Exemplo", Vector2.Zero, Color.Black);
         _spriteBatch.End();
 
         base.Draw(gameTime);
