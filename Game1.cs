@@ -9,6 +9,9 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private SpriteFont _font;
+    private string _text;
+    private bool _onOff;
+    private double _time;
 
     public Game1()
     {
@@ -21,6 +24,9 @@ public class Game1 : Game
     {
         base.Initialize();
 
+        _text = "DESLIGADO";
+        _onOff = false;
+        _time = 0.0;
     }
 
     protected override void LoadContent()
@@ -36,6 +42,22 @@ public class Game1 : Game
 
         // TODO: Add your update logic here
 
+        _time = _time + gameTime.ElapsedGameTime.TotalSeconds;
+        if (_time > 3.0)
+        {
+            _time = 0.0;
+            _onOff = !_onOff;
+
+            if (_onOff)
+            {
+                _text = "LIGADO";
+            }
+            else
+            {
+                _text = "DESLIGADO";
+            }
+        }
+
         base.Update(gameTime);
     }
 
@@ -44,7 +66,7 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
         _spriteBatch.Begin();
-        _spriteBatch.DrawString(_font, "Texto", Vector2.Zero, Color.Red);
+        _spriteBatch.DrawString(_font, _text, Vector2.Zero, Color.Black);
         _spriteBatch.End();
 
         base.Draw(gameTime);
