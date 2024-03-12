@@ -10,7 +10,8 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
 
     private Timer _timer;
-    private Color _bgColor;
+    private Texture2D _coinAnimation;
+    private int _index;
 
     public Game1()
     {
@@ -23,15 +24,16 @@ public class Game1 : Game
     {
         base.Initialize();
 
-        _bgColor = Color.LightBlue;
+        _index = 0;
         _timer = new Timer();
-
-        _timer.Start(ChangeBG, 2.0, false);
+        _timer.Start(ChangeAnimationFrame, 0.1, true);
     }
 
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+        _coinAnimation = Content.Load<Texture2D>("coin_animation");
     }
 
     protected override void Update(GameTime gameTime)
@@ -48,26 +50,17 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(_bgColor);
+        GraphicsDevice.Clear(Color.CornflowerBlue);
         
-        /*
         _spriteBatch.Begin();
-        _spriteBatch.DrawString(_font, _timeText, Vector2.Zero, Color.Black);
+        _spriteBatch.Draw(_coinAnimation, new Rectangle(0, 0, 128, 128), new Rectangle(_index * 128, 0, 128, 128), Color.White);
         _spriteBatch.End();
-        */
 
         base.Draw(gameTime);
     }
 
-    private void ChangeBG()
+    private void ChangeAnimationFrame()
     {
-        if (_bgColor == Color.LightBlue)
-        {
-            _bgColor = Color.DarkBlue;
-        }
-        else
-        {
-            _bgColor = Color.LightBlue;
-        }
+        _index = _index > 4 ? 0 : _index + 1;
     }
 }
