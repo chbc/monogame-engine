@@ -9,10 +9,7 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
-    private SpriteFont _font;
-    private string _timeText;
-
-    private double _time;
+    private Timer _timer;
     private Color _bgColor;
 
     public Game1()
@@ -27,13 +24,14 @@ public class Game1 : Game
         base.Initialize();
 
         _bgColor = Color.LightBlue;
-        _time = 0.0;
+        _timer = new Timer();
+
+        _timer.Start(ChangeBG, 2.0, false);
     }
 
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        _font = Content.Load<SpriteFont>("impact32");
     }
 
     protected override void Update(GameTime gameTime)
@@ -42,24 +40,8 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
-        _timeText = string.Format("Tempo: {0}", gameTime.ElapsedGameTime.TotalSeconds);
-        
 
-        _time = _time + gameTime.ElapsedGameTime.TotalSeconds;
-
-
-        if (_time > 3.0)
-        {
-            _time = 0.0;
-            if (_bgColor == Color.LightBlue)
-            {
-                _bgColor = Color.DarkBlue;
-            }
-            else
-            {
-                _bgColor = Color.LightBlue;
-            }
-        }
+        _timer.Update(gameTime.ElapsedGameTime.TotalSeconds);
 
         base.Update(gameTime);
     }
@@ -68,10 +50,24 @@ public class Game1 : Game
     {
         GraphicsDevice.Clear(_bgColor);
         
+        /*
         _spriteBatch.Begin();
         _spriteBatch.DrawString(_font, _timeText, Vector2.Zero, Color.Black);
         _spriteBatch.End();
+        */
 
         base.Draw(gameTime);
+    }
+
+    private void ChangeBG()
+    {
+        if (_bgColor == Color.LightBlue)
+        {
+            _bgColor = Color.DarkBlue;
+        }
+        else
+        {
+            _bgColor = Color.LightBlue;
+        }
     }
 }
