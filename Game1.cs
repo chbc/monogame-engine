@@ -49,12 +49,6 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(_bgColor);
-        
-        /*
-        _spriteBatch.Begin();
-        _spriteBatch.DrawString(_font, _timeText, Vector2.Zero, Color.Black);
-        _spriteBatch.End();
-        */
 
         base.Draw(gameTime);
     }
