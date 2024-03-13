@@ -9,8 +9,8 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
-    private Timer _timer;
     private Color _bgColor;
+    private double _time;
 
     public Game1()
     {
@@ -23,10 +23,8 @@ public class Game1 : Game
     {
         base.Initialize();
 
-        _bgColor = Color.LightBlue;
-        _timer = new Timer();
-
-        _timer.Start(ChangeBG, 2.0, false);
+        _bgColor = Color.Black;
+        _time = 0.0;
     }
 
     protected override void LoadContent()
@@ -39,9 +37,19 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        // TODO: Add your update logic here
-
-        _timer.Update(gameTime.ElapsedGameTime.TotalSeconds);
+        _time = _time + gameTime.ElapsedGameTime.TotalSeconds;
+        if (_time > 2.0)
+        {
+            _time = 0.0;
+            if (_bgColor == Color.White)
+            {
+                _bgColor = Color.Black;
+            }
+            else
+            {
+                _bgColor = Color.White;
+            }
+        }
 
         base.Update(gameTime);
     }
@@ -51,17 +59,5 @@ public class Game1 : Game
         GraphicsDevice.Clear(_bgColor);
 
         base.Draw(gameTime);
-    }
-
-    private void ChangeBG()
-    {
-        if (_bgColor == Color.LightBlue)
-        {
-            _bgColor = Color.DarkBlue;
-        }
-        else
-        {
-            _bgColor = Color.LightBlue;
-        }
     }
 }
