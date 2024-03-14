@@ -9,9 +9,10 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
-    private Timer _timer;
     private Texture2D _coinAnimation;
+    private Rectangle[] _frames;
     private int _index;
+    private double _time;
 
     public Game1()
     {
@@ -24,9 +25,13 @@ public class Game1 : Game
     {
         base.Initialize();
 
+        _frames = new Rectangle[6]
+        {
+            new Rectangle(0, 0, 128, 128), new Rectangle(128, 0, 128, 128), new Rectangle(256, 0, 128, 128), 
+            new Rectangle(384, 0, 128, 128), new Rectangle(512, 0, 128, 128), new Rectangle(640, 0, 128, 128)
+        };
         _index = 0;
-        _timer = new Timer();
-        _timer.Start(ChangeAnimationFrame, 0.1, true);
+        _time = 0.0;
     }
 
     protected override void LoadContent()
@@ -41,9 +46,16 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        // TODO: Add your update logic here
-
-        _timer.Update(gameTime.ElapsedGameTime.TotalSeconds);
+        _time = _time + gameTime.ElapsedGameTime.TotalSeconds;
+        if (_time > 0.1)
+        {
+            _time = 0.0;
+            _index++;
+            if (_index > 5)
+            {
+                _index = 0;
+            }
+        }
 
         base.Update(gameTime);
     }
@@ -53,14 +65,9 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
         
         _spriteBatch.Begin();
-        _spriteBatch.Draw(_coinAnimation, new Rectangle(0, 0, 128, 128), new Rectangle(_index * 128, 0, 128, 128), Color.White);
+        _spriteBatch.Draw(_coinAnimation, new Rectangle(0, 0, 128, 128), _frames[_index], Color.White);
         _spriteBatch.End();
 
         base.Draw(gameTime);
-    }
-
-    private void ChangeAnimationFrame()
-    {
-        _index = _index > 4 ? 0 : _index + 1;
     }
 }
