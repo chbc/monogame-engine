@@ -1,0 +1,4 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"D:/Projetos/Uninassau/monogame-engine/Content/background.png","D:/Projetos/Uninassau/monogame-engine/Content/bin/DesktopGL/background.xnb","TextureProcessor","Texture2DContent",4537,1536085,0,189161
+"D:/Projetos/Uninassau/monogame-engine/Content/ball.png","D:/Projetos/Uninassau/monogame-engine/Content/bin/DesktopGL/ball.xnb","TextureProcessor","Texture2DContent",2246,4181,0,0026043
+"D:/Projetos/Uninassau/monogame-engine/Content/bar.png","D:/Projetos/Uninassau/monogame-engine/Content/bin/DesktopGL/bar.xnb","TextureProcessor","Texture2DContent",179,9685,0,0023776
