@@ -1,0 +1,3 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"D:/Projetos/Uninassau/monogame-engine/Content/arrow.png","D:/Projetos/Uninassau/monogame-engine/Content/bin/DesktopGL/arrow.xnb","TextureProcessor","Texture2DContent",9205,30181,0,1513936
+"D:/Projetos/Uninassau/monogame-engine/Content/bomb.png","D:/Projetos/Uninassau/monogame-engine/Content/bin/DesktopGL/bomb.xnb","TextureProcessor","Texture2DContent",7679,22805,0,0024604
