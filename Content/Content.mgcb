@@ -13,10 +13,3 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin impact32.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:impact32.spritefont
-

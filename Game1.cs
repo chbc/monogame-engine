@@ -26,12 +26,11 @@ public class Game1 : Game
         _bgColor = Color.LightBlue;
         _timer = new Timer();
 
-        _timer.Start(ChangeBG, 2.0, false);
+        _timer.Start(ChangeBG, 2.0f, true);
     }
 
     protected override void LoadContent()
     {
-        _spriteBatch = new SpriteBatch(GraphicsDevice);
     }
 
     protected override void Update(GameTime gameTime)
@@ -39,9 +38,7 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        // TODO: Add your update logic here
-
-        _timer.Update(gameTime.ElapsedGameTime.TotalSeconds);
+        _timer.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
         base.Update(gameTime);
     }
