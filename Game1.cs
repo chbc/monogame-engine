@@ -9,36 +9,32 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
-    private Texture2D _bomb;
-    private Vector2 _position;
-    private double _speed;
-    private const double ACCELERATION = 10;
-    private bool _isBombDropped;
+    private Player _player;
 
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-    }
-
-    protected override void Initialize()
-    {
-        base.Initialize();
-
-        _graphics.PreferredBackBufferHeight = 800;
-        _graphics.ApplyChanges();
-
-        _position = new Vector2(_graphics.PreferredBackBufferWidth / 2.0f, 0.0f);
-        _speed = 0.0;
-        _isBombDropped = false;
+        
+        _player = new Player();
     }
 
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        _bomb = Content.Load<Texture2D>("bomb");
+        _player.LoadContent(Content);
+    }
+
+    protected override void Initialize()
+    {
+        base.Initialize();
+        
+        Globals.SCREEN_WIDTH = _graphics.PreferredBackBufferWidth;
+        Globals.SCREEN_HEIGHT = _graphics.PreferredBackBufferHeight;
+
+        _player.Initialize();
     }
 
     protected override void Update(GameTime gameTime)
@@ -46,20 +42,7 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        if (Input.GetKeyDown(Keys.Space))
-        {
-            _position.Y = 0.0f;
-            _speed = 0.0f;
-            _isBombDropped = true;
-        }
-
-        if (_isBombDropped)
-        {
-            _speed = _speed + (ACCELERATION * gameTime.ElapsedGameTime.TotalSeconds);
-            _position.Y = _position.Y + (float)_speed;
-        }
-
-        Input.Update();
+        _player.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
 
         base.Update(gameTime);
     }
@@ -69,7 +52,7 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
         _spriteBatch.Begin();
-        _spriteBatch.Draw(_bomb, _position, Color.White);
+        _player.Draw(_spriteBatch);
         _spriteBatch.End();
 
         base.Draw(gameTime);
