@@ -4,6 +4,8 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>D:/Projetos/Uninassau/monogame-engine/Content/background1.jpg</File>
+    <File>D:/Projetos/Uninassau/monogame-engine/Content/background2.jpg</File>
     <File>D:/Projetos/Uninassau/monogame-engine/Content/helicopter/helicopter1.png</File>
     <File>D:/Projetos/Uninassau/monogame-engine/Content/helicopter/helicopter2.png</File>
     <File>D:/Projetos/Uninassau/monogame-engine/Content/helicopter/helicopter3.png</File>
@@ -12,6 +14,8 @@
     <File>D:/Projetos/Uninassau/monogame-engine/Content/helicopter/helicopter6.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

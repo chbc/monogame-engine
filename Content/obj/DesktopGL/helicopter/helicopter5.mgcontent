@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>D:/Projetos/Uninassau/monogame-engine/Content/helicopter/helicopter5.png</SourceFile>
-  <SourceTime>2024-03-23T20:38:13.5506143-03:00</SourceTime>
+  <SourceTime>2024-03-23T21:34:14.0793289-03:00</SourceTime>
   <DestFile>D:/Projetos/Uninassau/monogame-engine/Content/bin/DesktopGL/helicopter/helicopter5.xnb</DestFile>
-  <DestTime>2024-03-23T20:39:30.7743813-03:00</DestTime>
+  <DestTime>2024-03-23T23:23:59.710593-03:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T13:17:54-03:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

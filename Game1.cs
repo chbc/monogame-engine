@@ -10,21 +10,24 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
 
     private Player _player;
+    private Texture2D _background;
+    private Rectangle _scenePosition;
+    private Camera _camera;
 
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-        
-        _player = new Player();
     }
 
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+        _player = new Player();
         _player.LoadContent(Content);
+        _background = Content.Load<Texture2D>("background2");
     }
 
     protected override void Initialize()
@@ -34,6 +37,13 @@ public class Game1 : Game
         Globals.SCREEN_WIDTH = _graphics.PreferredBackBufferWidth;
         Globals.SCREEN_HEIGHT = _graphics.PreferredBackBufferHeight;
 
+        _scenePosition = new Rectangle
+        (
+            (Globals.SCREEN_WIDTH - _background.Width) / 2, Globals.SCREEN_HEIGHT - _background.Height,
+            _background.Width, _background.Height
+        );
+
+        _camera = new Camera();
         _player.Initialize();
     }
 
@@ -42,7 +52,8 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        _player.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+        Point playerOffset = _player.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+        _camera.Update(playerOffset, ref _scenePosition);
 
         base.Update(gameTime);
     }
@@ -52,6 +63,7 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
         _spriteBatch.Begin();
+        _spriteBatch.Draw(_background, _scenePosition, Color.White);
         _player.Draw(_spriteBatch);
         _spriteBatch.End();
 

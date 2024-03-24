@@ -12,6 +12,7 @@ public class Player
     private const int IMAGE_WIDTH = 130;
     private const int IMAGE_HEIGHT = 130;
     private Timer _timer;
+    private Rectangle _movementBounds;
 
     public void LoadContent(ContentManager content)
     {
@@ -28,14 +29,19 @@ public class Player
         _index = 0;
         _position = new Rectangle
         (
-            (Globals.SCREEN_WIDTH - IMAGE_WIDTH)/2, Globals.SCREEN_HEIGHT - IMAGE_HEIGHT,
+            (Globals.SCREEN_WIDTH - IMAGE_WIDTH)/2, Globals.SCREEN_HEIGHT - (IMAGE_HEIGHT * 2),
             IMAGE_WIDTH, IMAGE_HEIGHT
         );
         _timer = new Timer();
         _timer.Start(IncrementIndex, 0.075f, true);
+        _movementBounds = new Rectangle
+        (
+            Globals.SCREEN_WIDTH/8, Globals.SCREEN_HEIGHT/4,
+            (Globals.SCREEN_WIDTH/4) * 3, (Globals.SCREEN_HEIGHT/4) * 3
+        );
     }
 
-    public void Update(float deltaTime)
+    public Point Update(float deltaTime)
     {
         Vector2 direction = Vector2.Zero;
 
@@ -56,14 +62,33 @@ public class Player
             direction.X = 1.0f;
         }
 
+        Point result = Point.Zero;
+
         if (direction != Vector2.Zero)
         {
             direction.Normalize();
-            _position.X = _position.X + (int)(direction.X * SPEED * deltaTime);
-            _position.Y = _position.Y + (int)(direction.Y * SPEED * deltaTime);
+            result.X = (int)(direction.X * SPEED * deltaTime);
+            result.Y = (int)(direction.Y * SPEED * deltaTime);
+
+            Rectangle newPosition = _position;
+            newPosition.X += result.X;
+            newPosition.Y += result.Y;
+
+            if (newPosition.X > _movementBounds.X && newPosition.Right < _movementBounds.Right)
+            {
+                _position.X = newPosition.X;
+                result.X = 0;
+            }
+            if (newPosition.Y > _movementBounds.Y && newPosition.Bottom < _movementBounds.Bottom)
+            {
+                _position.Y = newPosition.Y;
+                result.Y = 0;
+            }
         }
 
         _timer.Update(deltaTime);
+
+        return result;
     }
 
     public void Draw(SpriteBatch spriteBatch)
