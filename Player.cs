@@ -11,6 +11,7 @@ public class Player
     private const float SPEED = 200;
     private const int IMAGE_WIDTH = 130;
     private const int IMAGE_HEIGHT = 130;
+    private Timer _timer;
 
     public void LoadContent(ContentManager content)
     {
@@ -30,6 +31,8 @@ public class Player
             (Globals.SCREEN_WIDTH - IMAGE_WIDTH)/2, Globals.SCREEN_HEIGHT - IMAGE_HEIGHT,
             IMAGE_WIDTH, IMAGE_HEIGHT
         );
+        _timer = new Timer();
+        _timer.Start(IncrementIndex, 0.075f, true);
     }
 
     public void Update(float deltaTime)
@@ -59,10 +62,21 @@ public class Player
             _position.X = _position.X + (int)(direction.X * SPEED * deltaTime);
             _position.Y = _position.Y + (int)(direction.Y * SPEED * deltaTime);
         }
+
+        _timer.Update(deltaTime);
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(_images[_index], _position, Color.White);
+    }
+
+    private void IncrementIndex()
+    {
+        _index++;
+        if (_index > 5)
+        {
+            _index = 0;
+        }
     }
 }
