@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 
-public class Input
+public static class Input
 {
     private static List<Keys> _consumedKeys = new List<Keys>();
 
