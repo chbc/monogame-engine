@@ -53,7 +53,7 @@ public class Game1 : Game
             Exit();
 
         float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-        Point playerOffset = _player.Update(deltaTime);
+        Vector2 playerOffset = _player.Update(deltaTime);
         _camera.Update(playerOffset, ref _scenePosition);
 
         base.Update(gameTime);

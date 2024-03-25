@@ -2,9 +2,10 @@ using Microsoft.Xna.Framework;
 
 public class Camera
 {
-    public void Update(Point playerOffset, ref Rectangle scenePosition)
+    public void Update(Vector2 playerOffset, ref Rectangle scenePosition)
     {
-        scenePosition.Location -= playerOffset;
+        scenePosition.X -= (int)playerOffset.X;
+        scenePosition.Y -= (int)playerOffset.Y;
 
         if (scenePosition.X > 0)
         {

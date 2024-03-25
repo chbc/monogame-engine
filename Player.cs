@@ -41,7 +41,7 @@ public class Player
         );
     }
 
-    public Point Update(float deltaTime)
+    public Vector2 Update(float deltaTime)
     {
         Vector2 direction = Vector2.Zero;
 
@@ -62,33 +62,32 @@ public class Player
             direction.X = 1.0f;
         }
 
-        Point result = Point.Zero;
+        Vector2 offset = Vector2.Zero;
 
         if (direction != Vector2.Zero)
         {
             direction.Normalize();
-            result.X = (int)(direction.X * SPEED * deltaTime);
-            result.Y = (int)(direction.Y * SPEED * deltaTime);
+            offset = direction * SPEED * deltaTime;
 
             Rectangle newPosition = _position;
-            newPosition.X += result.X;
-            newPosition.Y += result.Y;
+            newPosition.X += (int)offset.X;
+            newPosition.Y += (int)offset.Y;
 
             if (newPosition.X > _movementBounds.X && newPosition.Right < _movementBounds.Right)
             {
                 _position.X = newPosition.X;
-                result.X = 0;
+                offset.X = 0;
             }
             if (newPosition.Y > _movementBounds.Y && newPosition.Bottom < _movementBounds.Bottom)
             {
                 _position.Y = newPosition.Y;
-                result.Y = 0;
+                offset.Y = 0;
             }
         }
 
         _timer.Update(deltaTime);
 
-        return result;
+        return offset;
     }
 
     public void Draw(SpriteBatch spriteBatch)
