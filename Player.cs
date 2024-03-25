@@ -53,8 +53,10 @@ public class Player
         if (direction != Vector2.Zero)
         {
             direction.Normalize();
-            _position.X = _position.X + (int)(direction.X * SPEED * deltaTime);
-            _position.Y = _position.Y + (int)(direction.Y * SPEED * deltaTime);
+            Vector2 offset = direction * SPEED * deltaTime;
+            
+            _position.X += (int)offset.X;
+            _position.Y += (int)offset.Y;
         }
 
         _timer.Update(deltaTime);
