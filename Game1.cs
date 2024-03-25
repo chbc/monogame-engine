@@ -52,7 +52,8 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        Point playerOffset = _player.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+        float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        Point playerOffset = _player.Update(deltaTime);
         _camera.Update(playerOffset, ref _scenePosition);
 
         base.Update(gameTime);
