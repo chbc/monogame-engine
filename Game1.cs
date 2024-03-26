@@ -16,14 +16,14 @@ public class Game1 : Game
         IsMouseVisible = true;
     }
 
-    protected override void Initialize()
-    {
-        base.Initialize();
-    }
-
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
+    }
+
+    protected override void Initialize()
+    {
+        base.Initialize();
     }
 
     protected override void Update(GameTime gameTime)
